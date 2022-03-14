@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CountDownAssignment</string>
+    <string name="_10_00">10:00</string>
+    <string name="start">start</string>
+</resources>
