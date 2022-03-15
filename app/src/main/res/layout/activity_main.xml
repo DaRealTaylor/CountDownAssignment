@@ -20,5 +20,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/start"/>
-    <!--        android:onClick=""-->
+    <!--        android:onClick="startTimer"-->
 </androidx.appcompat.widget.LinearLayoutCompat>
