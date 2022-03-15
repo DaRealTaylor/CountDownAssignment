@@ -11,8 +11,8 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private static final long StartTime = 600000;
-    private long milliTimeLeft = 600000; //10 minutes
+    private static final long StartTime = 6000; //10 minutes
+    private long milliTimeLeft = StartTime;
     private TextView countDown;
     private Button startButton;
     private Button resetButton;
@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                isActive = false;
+                resetCountdown();
+                startButton.setText("Start");
             }
         };
         countdowntimer.start();
