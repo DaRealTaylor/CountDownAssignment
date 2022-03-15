@@ -9,19 +9,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    CountDownTimer countDownTimer = null;
-    private TextView countDowntimer;
-    private Button button;
+    private long milliTimeLeft = 600000; //10 minutes
+    private TextView countDown;
+    private Button startButton;
     private boolean isActive;
+    private CountDownTimer countdowntimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        countDowntimer = findViewById(R.id.countDown);
-        button = findViewById(R.id.start);
+        countDown = findViewById(R.id.countDown);
+        startButton = findViewById(R.id.start);
 
-        button.setOnClickListener(new View.OnClickListener(){
+        startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 startStop();
@@ -38,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startTimer(){
-        countDownTimer = new CountDownTimer(30000, 1000) {
+        countdowntimer = new CountDownTimer(milliTimeLeft, 1000) {
             @Override
             public void onTick(long l) {
+                milliTimeLeft = l;
                 UpdateTimer();
             }
 
@@ -49,28 +52,29 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
-        countDownTimer.start();
-
+        countdowntimer.start();
+        startButton.setText("PAUSE");
         isActive = true;
     }
 
     void stopTimer(){
-        if(countDownTimer != null){
-            countDownTimer.cancel();
-            isActive = false;
-        }
+        countdowntimer.cancel();
+        isActive = false;
+        startButton.setText("START");
     }
 
     public void UpdateTimer(){
-        int minute = (int) 30000 / 60000;
-        int seconds = (int) 30000 / 60000 / 1000;
+        int minute = (int) milliTimeLeft / 60000;
+        int seconds = (int) milliTimeLeft % 60000 / 1000;
 
         String timeLeft;
 
-        timeLeft = minute + ":" + seconds;
+        timeLeft = "" + minute;
+        timeLeft += ":";
         if (seconds <10) timeLeft += "0";
         timeLeft += seconds;
+        System.out.println(timeLeft);
 
-        countDowntimer.setText(timeLeft);
+        countDown.setText(timeLeft);
     }
 }
