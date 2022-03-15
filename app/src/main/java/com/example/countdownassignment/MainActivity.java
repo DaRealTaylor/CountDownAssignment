@@ -8,10 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
+    private static final long StartTime = 600000;
     private long milliTimeLeft = 600000; //10 minutes
     private TextView countDown;
     private Button startButton;
+    private Button resetButton;
     private boolean isActive;
     private CountDownTimer countdowntimer;
 
@@ -22,11 +26,19 @@ public class MainActivity extends AppCompatActivity {
 
         countDown = findViewById(R.id.countDown);
         startButton = findViewById(R.id.start);
+        resetButton = findViewById(R.id.reset);
 
         startButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 startStop();
+            }
+        });
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetCountdown();
             }
         });
     }
@@ -61,19 +73,26 @@ public class MainActivity extends AppCompatActivity {
         countdowntimer.cancel();
         isActive = false;
         startButton.setText("START");
+        resetButton.setVisibility(View.VISIBLE);
     }
 
     public void UpdateTimer(){
         int minute = (int) milliTimeLeft / 60000;
         int seconds = (int) milliTimeLeft % 60000 / 1000;
 
-        String timeLeft;
-
-        timeLeft = "" + minute;
-        timeLeft += ":";
-        if (seconds <10) timeLeft += "0";
-        timeLeft += seconds;
+        String timeLeft = String.format(Locale.getDefault(), "%02d:%02d", minute, seconds);
+//
+//        timeLeft = "" + minute;
+//        timeLeft += ":";
+//        if (seconds <10) timeLeft += "0";
+//        timeLeft += seconds;
 
         countDown.setText(timeLeft);
+    }
+
+    private void resetCountdown(){
+        milliTimeLeft = StartTime;
+        UpdateTimer();
+        resetButton.setVisibility(View.INVISIBLE);
     }
 }
