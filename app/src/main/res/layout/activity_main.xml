@@ -28,5 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/reset"
-        android:onClick="reset"/>
+        android:onClick="reset"
+        android:visibility="invisible"
+        tools:visibility="visible"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
