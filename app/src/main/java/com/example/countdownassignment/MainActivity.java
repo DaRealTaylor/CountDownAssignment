@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         timeLeft += ":";
         if (seconds <10) timeLeft += "0";
         timeLeft += seconds;
-        System.out.println(timeLeft);
 
         countDown.setText(timeLeft);
     }
