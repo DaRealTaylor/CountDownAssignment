@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private static final long StartTime = 6000; //10 minutes
+    private static final long StartTime = 60000; //10 minutes
     private long milliTimeLeft = StartTime;
     private TextView countDown;
     private Button startButton;
@@ -64,19 +64,21 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 isActive = false;
                 resetCountdown();
-                startButton.setText("Start");
+                updateButtons();
+//                startButton.setText("Start");
             }
         };
         countdowntimer.start();
-        startButton.setText("PAUSE");
         isActive = true;
+        updateButtons();
     }
 
     void stopTimer(){
         countdowntimer.cancel();
         isActive = false;
-        startButton.setText("START");
-        resetButton.setVisibility(View.VISIBLE);
+        updateButtons();
+//        startButton.setText("START");
+//        resetButton.setVisibility(View.VISIBLE);
     }
 
     public void UpdateTimer(){
@@ -84,17 +86,28 @@ public class MainActivity extends AppCompatActivity {
         int seconds = (int) milliTimeLeft % 60000 / 1000;
 
         String timeLeft = String.format(Locale.getDefault(), "%02d:%02d", minute, seconds);
-//
-//        timeLeft = "" + minute;
-//        timeLeft += ":";
-//        if (seconds <10) timeLeft += "0";
-//        timeLeft += seconds;
-
         countDown.setText(timeLeft);
     }
 
     private void updateButtons(){
-        if ()
+        if (isActive){
+            resetButton.setVisibility(View.INVISIBLE);
+            startButton.setText("Pause");
+        } else {
+            startButton.setText("Start");
+
+            if (milliTimeLeft < 1000) {
+                startButton.setVisibility(View.INVISIBLE);
+            } else {
+                startButton.setVisibility(View.VISIBLE);
+            }
+
+            if (milliTimeLeft < StartTime) {
+                resetButton.setVisibility(View.VISIBLE);
+            } else {
+                resetButton.setVisibility(View.INVISIBLE);
+            }
+        }
     }
 
     private void resetCountdown(){
@@ -114,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
+        milliTimeLeft = savedInstanceState.getLong("millisecondsLeft");
+        isActive = savedInstanceState.getBoolean("isRunning");
+        updateButtons();
+        UpdateTimer();
 
+        if (isActive){
+            startTimer();
+        }
     }
 }
