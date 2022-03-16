@@ -1,5 +1,6 @@
 package com.example.countdownassignment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -92,9 +93,27 @@ public class MainActivity extends AppCompatActivity {
         countDown.setText(timeLeft);
     }
 
+    private void updateButtons(){
+        if ()
+    }
+
     private void resetCountdown(){
         milliTimeLeft = StartTime;
         UpdateTimer();
         resetButton.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("millisecondsLeft", milliTimeLeft);
+        outState.putBoolean("isRunning", isActive);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+
     }
 }
