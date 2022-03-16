@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Button resetButton;
     private boolean isActive;
     private CountDownTimer countdowntimer;
+    private long endTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startTimer(){
+        endTime = System.currentTimeMillis() + milliTimeLeft;
+
         countdowntimer = new CountDownTimer(milliTimeLeft, 1000) {
             @Override
             public void onTick(long l) {
@@ -121,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putLong("millisecondsLeft", milliTimeLeft);
         outState.putBoolean("isRunning", isActive);
+        outState.putLong("endTime", endTime);
     }
 
     @Override
@@ -133,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
         UpdateTimer();
 
         if (isActive){
+            endTime = savedInstanceState.getLong("endTime");
+            milliTimeLeft = endTime - System.currentTimeMillis();
             startTimer();
         }
     }
