@@ -100,32 +100,33 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 isActive = false;
                 resetCountdown();
-                updateButtons();
+                UpdateInterface();
 //                startButton.setText("Start");
             }
         };
         countdowntimer.start();
         isActive = true;
-        updateButtons();
+        UpdateInterface();
     }
 
     void stopTimer(){
         countdowntimer.cancel();
         isActive = false;
-        updateButtons();
+        UpdateInterface();
 //        startButton.setText("START");
 //        resetButton.setVisibility(View.VISIBLE);
     }
 
     public void UpdateTimer(){
-        int minute = (int) milliTimeLeft / 60000;
-        int seconds = (int) milliTimeLeft % 60000 / 1000;
+        int hours = (int) (milliTimeLeft / 1000) / 3600;
+        int minute = (int) ((milliTimeLeft / 1000) % 3600) / 60;
+        int seconds = (int) milliTimeLeft % 1000 % 60;
 
         String timeLeft = String.format(Locale.getDefault(), "%02d:%02d", minute, seconds);
         countDown.setText(timeLeft);
     }
 
-    private void updateButtons(){
+    private void UpdateInterface(){
         if (isActive){
             editText.setVisibility(View.INVISIBLE);
             setButton.setVisibility(View.INVISIBLE);
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     private void resetCountdown(){
         milliTimeLeft = mStartTime;
         UpdateTimer();
-        updateButtons();
+        UpdateInterface();
 //        resetButton.setVisibility(View.INVISIBLE);
     }
 
@@ -171,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         milliTimeLeft = savedInstanceState.getLong("millisecondsLeft");
         isActive = savedInstanceState.getBoolean("isRunning");
-        updateButtons();
+        UpdateInterface();
         UpdateTimer();
 
         if (isActive){
