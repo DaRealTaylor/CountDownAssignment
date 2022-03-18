@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
                 isActive = false;
                 resetCountdown();
                 UpdateInterface();
-//                startButton.setText("Start");
             }
         };
         countdowntimer.start();
@@ -153,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
         milliTimeLeft = mStartTime;
         UpdateTimer();
         UpdateInterface();
-//        resetButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
