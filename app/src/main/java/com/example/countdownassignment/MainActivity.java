@@ -113,16 +113,14 @@ public class MainActivity extends AppCompatActivity {
         countdowntimer.cancel();
         isActive = false;
         UpdateInterface();
-//        startButton.setText("START");
-//        resetButton.setVisibility(View.VISIBLE);
     }
 
     public void UpdateTimer(){
         int hours = (int) (milliTimeLeft / 1000) / 3600;
         int minute = (int) ((milliTimeLeft / 1000) % 3600) / 60;
-        int seconds = (int) milliTimeLeft % 1000 % 60;
+        int seconds = (int) milliTimeLeft / 1000 % 60;
 
-        String timeLeft = String.format(Locale.getDefault(), "%02d:%02d", minute, seconds);
+        String timeLeft = String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minute, seconds);
         countDown.setText(timeLeft);
     }
 
