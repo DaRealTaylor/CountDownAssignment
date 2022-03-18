@@ -6,22 +6,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/edit_text"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/countDown"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/enter_minutes"
-        android:inputType="number"
-        android:maxLength="4"/>
-
-    <Button
-        android:id="@+id/button_set"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "@string/set"/>
-
     <TextView
         android:id="@+id/countDown"
         android:layout_width="match_parent"
@@ -29,6 +13,24 @@
         android:textAlignment="center"
         android:text="@string/_00_00"
         android:textSize="48sp" />
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/countDown"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/enter_minutes"
+        android:layout_gravity="center"
+        android:inputType="number"
+        android:maxLength="4" />
+
+    <Button
+        android:id="@+id/button_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/start"
