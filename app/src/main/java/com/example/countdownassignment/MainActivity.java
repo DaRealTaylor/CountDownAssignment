@@ -127,10 +127,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateButtons(){
         if (isActive){
+            editText.setVisibility(View.INVISIBLE);
+            setButton.setVisibility(View.INVISIBLE);
             resetButton.setVisibility(View.INVISIBLE);
             startButton.setText("Pause");
         } else {
             startButton.setText("Start");
+            editText.setVisibility(View.VISIBLE);
+            setButton.setVisibility(View.VISIBLE);
 
             if (milliTimeLeft < 1000) {
                 startButton.setVisibility(View.INVISIBLE);
