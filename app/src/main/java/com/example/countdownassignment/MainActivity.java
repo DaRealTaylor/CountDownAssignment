@@ -7,17 +7,22 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private static final long StartTime = 60000; //10 minutes
-    private long milliTimeLeft = StartTime;
+    private EditText editText;
     private TextView countDown;
+    private Button setButton;
     private Button startButton;
     private Button resetButton;
+
     private boolean isActive;
+
+    private long milliTimeLeft;
+    private long mStartTime;
     private CountDownTimer countdowntimer;
     private long endTime;
 
@@ -105,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 startButton.setVisibility(View.VISIBLE);
             }
 
-            if (milliTimeLeft < StartTime) {
+            if (milliTimeLeft < mStartTime) {
                 resetButton.setVisibility(View.VISIBLE);
             } else {
                 resetButton.setVisibility(View.INVISIBLE);
@@ -114,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetCountdown(){
-        milliTimeLeft = StartTime;
+        milliTimeLeft = mStartTime;
         UpdateTimer();
         resetButton.setVisibility(View.INVISIBLE);
     }
