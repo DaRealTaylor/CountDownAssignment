@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private void setTime(long milliseconds){
         mStartTime = milliseconds;
         resetCountdown();
+        closeKeyboard();
     }
 
     public void startTimer(){
@@ -146,6 +148,14 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 resetButton.setVisibility(View.INVISIBLE);
             }
+        }
+    }
+
+    private void closeKeyboard(){
+        View view = this.getCurrentFocus();
+        if (view != null){
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
