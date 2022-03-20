@@ -46,12 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void doneClicked(View view){
-        String text = editText.getText().toString();
-        int speed = Integer.parseInt(text);
-
-        Intent intent = new Intent(String.valueOf(speed));
-        intent.putExtra("speed", speed);
-        setResult(RESULT_OK, intent);
-        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

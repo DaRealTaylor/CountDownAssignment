@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/done"
         android:textColor="?attr/text_color"
+        android:onClick="doneClicked"
         tools:layout_editor_absoluteX="158dp"
         tools:layout_editor_absoluteY="245dp" />
 </LinearLayout>
