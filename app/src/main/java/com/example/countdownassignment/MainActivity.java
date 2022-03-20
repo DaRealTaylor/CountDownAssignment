@@ -3,6 +3,7 @@ package com.example.countdownassignment;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -176,5 +177,10 @@ public class MainActivity extends AppCompatActivity {
             milliTimeLeft = endTime - System.currentTimeMillis();
             startTimer();
         }
+    }
+
+    public void settingsClicked(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivityForResult(intent, SettingsActivity.SETTINGS_REQUEST);
     }
 }
