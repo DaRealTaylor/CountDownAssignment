@@ -13,7 +13,6 @@ import android.widget.EditText;
 
 public class SettingsActivity extends AppCompatActivity {
     public static final int SETTINGS_REQUEST = 1;
-//    private EditText editText;
     Button doneButton;
     SwitchCompat switchCompat;
 
