@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Starts and stop the timer
     public void startStop(){
         if (isActive){
             stopTimer();
@@ -83,22 +84,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Sets the time to the user's input
     private void setTime(long milliseconds){
         mStartTime = milliseconds;
         resetCountdown();
         closeKeyboard();
     }
 
+    //Starts the countdown timer at an interval of 1 second per tick
     public void startTimer(){
         endTime = System.currentTimeMillis() + milliTimeLeft;
-
         countdowntimer = new CountDownTimer(milliTimeLeft, 1000) {
+
+            //Ticks down the timer
             @Override
             public void onTick(long l) {
                 milliTimeLeft = l;
                 UpdateTimer();
             }
 
+            //Stops the countdown upon reaching 00:00:00 and resets it to initial set time
             @Override
             public void onFinish() {
                 isActive = false;
@@ -111,12 +116,14 @@ public class MainActivity extends AppCompatActivity {
         UpdateInterface();
     }
 
+    //Stops the countdown once called
     void stopTimer(){
         countdowntimer.cancel();
         isActive = false;
         UpdateInterface();
     }
 
+    //Update and prints the remaining time left on the countdown
     public void UpdateTimer(){
         int hours = (int) (milliTimeLeft / 1000) / 3600;
         int minute = (int) ((milliTimeLeft / 1000) % 3600) / 60;
@@ -126,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
         countDown.setText(timeLeft);
     }
 
+    //Updates the interface by making buttons VISIBLE or INVISIBLE
+    //Changes buttons text from START to PAUSE depending if app is paused or not
     private void UpdateInterface(){
         if (isActive){
             editText.setVisibility(View.INVISIBLE);
@@ -151,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Minimizes the phone keyboard once they press SET
     private void closeKeyboard(){
         View view = this.getCurrentFocus();
         if (view != null){
@@ -159,12 +169,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //resets the countdown to initially set time
     private void resetCountdown(){
         milliTimeLeft = mStartTime;
         UpdateTimer();
         UpdateInterface();
     }
 
+    //The following code saves the state the app is in and allows it to continue running after rotation
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -189,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Opens the settings screen upon click
     public void settingsClicked(View view){
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivityForResult(intent, SettingsActivity.SETTINGS_REQUEST);
