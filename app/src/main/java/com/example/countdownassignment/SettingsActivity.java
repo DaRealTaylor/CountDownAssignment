@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 public class SettingsActivity extends AppCompatActivity {
     public static final int SETTINGS_REQUEST = 1;
-    private EditText editText;
+//    private EditText editText;
     Button doneButton;
     SwitchCompat switchCompat;
 
@@ -31,6 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
         doneButton = (Button)findViewById(R.id.Done);
         switchCompat = findViewById(R.id.switch1);
 
+        //Allows the user to switch between dark mode and light mode
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -43,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    //returns user to main screen
     public void doneClicked(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
